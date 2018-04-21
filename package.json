@@ -2,6 +2,7 @@
   "name": "tailwind-zeplin-extension",
   "version": "0.0.0-development",
   "description": "Utilities to generate Tailwind Config and classes for your components.",
+  "repository": "https://github.com/morrislaptop/tailwind-zeplin-extension.git",
   "scripts": {
     "start": "zem start",
     "build": "zem build",
