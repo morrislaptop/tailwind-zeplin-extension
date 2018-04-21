@@ -16,7 +16,7 @@ function layer(context, selectedLayer) {
  */
 function styleguideColors(context, colors) {
     let tailwind = colors.reduce((obj, color) => {
-        obj[color.name] = color.hexBase()
+        obj[color.name] = '#' + color.hexBase()
         
         return obj
     }, {})
