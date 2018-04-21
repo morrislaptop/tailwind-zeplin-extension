@@ -6,7 +6,8 @@
     "start": "zem start",
     "build": "zem build",
     "clean": "zem clean",
-    "exec": "zem exec"
+    "exec": "zem exec",
+    "prepublishOnly": "yarn build"
   },
   "zeplin": {
     "displayName": "tailwind-zeplin-extension",
@@ -16,5 +17,8 @@
   },
   "dependencies": {
     "zem": "^0.1.2"
+  },
+  "devDependencies": {
+    "semantic-release": "^15.1.7"
   }
 }
