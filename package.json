@@ -1,0 +1,20 @@
+{
+  "name": "tailwind-zeplin-extension",
+  "version": "0.1.0",
+  "description": "Utilities to generate Tailwind Config and classes for your components.",
+  "scripts": {
+    "start": "zem start",
+    "build": "zem build",
+    "clean": "zem clean",
+    "exec": "zem exec"
+  },
+  "zeplin": {
+    "displayName": "tailwind-zeplin-extension",
+    "projectTypes": [
+      "web"
+    ]
+  },
+  "dependencies": {
+    "zem": "^0.1.2"
+  }
+}
