@@ -21,7 +21,7 @@ function styleguideColors(context, colors) {
         return obj
     }, {})
 
-    let js = 'let colours = '
+    let js = 'let colors = '
 
     js += JSON.stringify(tailwind, null, 2)
 
