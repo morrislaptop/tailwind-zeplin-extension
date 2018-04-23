@@ -162,16 +162,30 @@ function styleguideTextStyles(context, styles) {
 
 
 
-function exportStyleguideColors(context, colors) {
-
-}
-
-function exportStyleguideTextStyles(context, colors) {
-
-}
-
 function comment(context, text) {
+    return `/* ${text} */`;
+}
 
+function exportStyleguideColors(context, colors) {
+    var codeObject = styleguideColors(context, colors);
+    var code = codeObject.code;
+
+    return {
+        code: code,
+        filename: "colors.js",
+        language: "javascript"
+    };
+}
+
+function exportStyleguideTextStyles(context, textstyles) {
+    var codeObject = styleguideTextStyles(context, textstyles);
+    var code = codeObject.code;
+
+    return {
+        code: code,
+        filename: "fonts.css",
+        language: "css"
+    };
 }
 
 module.exports = {
