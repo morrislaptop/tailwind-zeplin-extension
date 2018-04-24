@@ -10,68 +10,84 @@ function ExpectEmptyTest(context, layer) {
 }
 
 let tests = {
-  SampleScreen: ExpectEmptyTest,
+  SampleScreen(context, layer) {
+    let css = ext.layer(context, layer)
+  
+    expect(css.code).toBe('<div class="max-w-xs min-h-lg"></div>')
+  },
 
   TextLayerWithMultipleStyles(context, layer) {
     let css = ext.layer(context, layer)
 
     expect(css.code).toBe(`<p class="text-xl font-medium">Type</p>
 <p class="text-xl text-green">something</p>
-<p class="sample-text-style-with-color">red</p>`)
+<p class="sample-text-style-with-color uppercase">RED</p>`)
   },
 
   TextLayer(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<p class="sample-text-style">Type something</p>`)
+    expect(css.code).toBe(`<p class="sample-text-style truncate">Type something...</p>`)
   },
 
-  LayerWithBlur: ExpectEmptyTest,
+  LayerWithBlur(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="max-w-xs"></div>`)
+  },
 
   ExportableLayer(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="bg-yellow"></div>`)
+    expect(css.code).toBe(`<div class="bg-yellow max-w-xs"></div>`)
   },
 
   LayerWithBorderRadius(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="rounded-lg bg-red"></div>`)
+    expect(css.code).toBe(`<div class="rounded-lg bg-red max-w-xs"></div>`)
   },
 
   RotatedLayer(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="bg-green"></div>`)
+    expect(css.code).toBe(`<div class="bg-green max-w-xs"></div>`)
   },
 
   TransparentLayerWithBlendMode(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="opacity-25 bg-green"></div>`)
+    expect(css.code).toBe(`<div class="opacity-25 bg-green max-w-xs"></div>`)
   },
 
   LayerWithShadow(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="shadow"></div>`)
+    expect(css.code).toBe(`<div class="shadow max-w-xs"></div>`)
   },
 
-  LayerWithGradientFill: ExpectEmptyTest,
+  LayerWithGradientFill(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="max-w-xs"></div>`)
+  },
 
   LayerWithFill(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="bg-blue"></div>`)
+    expect(css.code).toBe(`<div class="bg-blue max-w-xs"></div>`)
   },
 
-  LayerWithGradientBorder: ExpectEmptyTest,
+  LayerWithGradientBorder(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="border-4 max-w-xs"></div>`)
+  },
   
   LayerWithBorder(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="border border-green"></div>`)
+    expect(css.code).toBe(`<div class="border-2 border-green max-w-xs"></div>`)
   },
 }
 
@@ -108,22 +124,3 @@ test('outputs responsive classes as well for shape elements', () => {
   // Assert.
   expect(css.code).toContain('sm:')
 })
-
-// test('outputs a p without widths for text layers', () => {
-//   // Arrange.
-//   let context = new Context({ project, options: { font: 'sfprotext', color: 'black' }})
-  
-//   let layer = new Layer({ type: "text", content: "Type something red", borders: [], fills: [], shadows: [], textStyles: [
-//     { range: { location: 0, length: 4 }, style: { fontFace: "SFProText-Medium", "fontSize": 20, "color": {r: 0, g: 0, b: 0, a: 1 } }},
-//     { range: { location: 5, length: 9 }, style: { fontFace: "SFProText-Regular", "fontSize": 20, "color": {r: 0, g: 255, b: 0, a: 1 } }},
-//     { range: { location: 15, length: 3 }, style: { fontFace: "SFProText-Regular", "fontSize": 20, "color": {r: 255, g: 0, b: 0, a: 1 } }},
-//   ]})
-
-//   // Act.
-//   let css = ext.layer(context, layer)
-
-//   // Assert.
-//   expect(css.code).toBe(`<p class="text-xl font-medium">Type</p>
-// <p class="text-xl text-green">Something</p>
-// <p class=".sample-text-style-with-color">red</p>`)
-// })

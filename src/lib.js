@@ -96,7 +96,37 @@ function borderClass(tailwind, borders) {
     if (!borders[0]) return null
     let border = borders[0]
 
-    return colorToClass(context, fill.color, 'bg-')
+    let sizes = dropTheRem(tailwind.borderWidths)
+    let key = closestKey(sizes, border.thickness)
+
+    if (key === 'default') return null
+
+    return 'border-' + key
+}
+
+function borderColor(context, tailwind, borders) {
+    if (!borders[0] || !borders[0].fill.color) return null
+    let border = borders[0]
+
+    return colorToClass(context, border.fill.color, 'border-')
+}
+
+function maxWidthClass(tailwind, { width }) {
+    let ratio = width / REM
+    let widths = dropTheRem(tailwind.maxWidth)
+    let key = closestKey(widths, ratio)
+
+    return 'max-w-' + key
+}
+
+function minHeightClass(tailwind, { height }) {
+    let ratio = height / REM
+    let heights = dropTheRem(tailwind.minHeight)
+    let key = closestKey(heights, ratio)
+
+    if (key === '0') return null
+
+    return 'min-h-' + key
 }
 
 function shapeLayerToCode(tailwind, context, layer) {
@@ -105,7 +135,10 @@ function shapeLayerToCode(tailwind, context, layer) {
         opacityToClass(tailwind, layer.opacity),
         shadowsToClass(tailwind, layer.shadows),
         backgroundClass(context, tailwind, layer.fills),
-        borderClass(tailwind, layer.borders)
+        borderClass(tailwind, layer.borders),
+        borderColor(context, tailwind, layer.borders),
+        maxWidthClass(tailwind, layer.rect),
+        minHeightClass(tailwind, layer.rect),
     ]
 
     return classesToCode(tailwind.screens, 'div', classes.filter(n => n))
@@ -117,10 +150,28 @@ function textLayerToCode(tailwind, context, layer) {
     return tags.join("\n")
 }
 
+function contentToTransformClass(content) {
+    if (content !== content.toUpperCase()) return null
+
+    return 'uppercase'
+}
+
+function contentToTruncateClass(content) {
+    if (!content.includes('...') && !content.includes('…')) return null
+
+    return 'truncate'
+}
+
 function textStyleToCode(tailwind, context, layer, style) {
     let projectStyle = context.project.findTextStyleEqual(style.textStyle)
     let classes = projectStyle ? [s(projectStyle.name).slugify().s] : fontAndTextClasses(tailwind, context, style.textStyle)
     let content = layer.content.substring(style.range.start, style.range.end)
+
+    // Add some extra classes based on the content
+    classes = classes.concat([
+        contentToTransformClass(content),
+        contentToTruncateClass(content)
+    ]).filter(n => n)
     
     return classesToCode({}, 'p', classes, content)
 }

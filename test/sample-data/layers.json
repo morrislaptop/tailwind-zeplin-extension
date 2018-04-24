@@ -32,7 +32,7 @@
             "width": 220,
             "height": 24
         },
-        "content": "Type something red",
+        "content": "Type something RED",
         "borders": [],
         "fills": [],
         "shadows": [],
@@ -120,7 +120,7 @@
             "width": 220,
             "height": 24
         },
-        "content": "Type something",
+        "content": "Type something...",
         "borders": [],
         "fills": [],
         "shadows": [],
@@ -128,7 +128,7 @@
             {
                 "range": {
                     "location": 0,
-                    "length": 14
+                    "length": 17
                 },
                 "style": {
                     "fontFace": "SFProText-Regular",
