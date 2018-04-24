@@ -72,7 +72,7 @@ Specify your default colour here and it will be excluded from the generated clas
 
 If you have node >= 5.2.0, use `npx`:
 
-    npx tailwind-zeplin-extension
+    npx tailwind-zeplin-extension start
 
 Otherwise:
 
