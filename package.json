@@ -38,6 +38,8 @@
     ]
   },
   "dependencies": {
+    "css": "^2.2.1",
+    "css-shorthand-expand": "^1.2.0",
     "lodash": "^4.17.5",
     "string": "^3.3.3",
     "zem": "^0.1.2"

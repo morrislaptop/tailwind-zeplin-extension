@@ -27,21 +27,52 @@ let tests = {
   },
 
   LayerWithBlur: ExpectEmptyTest,
-  ExportableLayer: ExpectEmptyTest,
+
+  ExportableLayer(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="bg-yellow"></div>`)
+  },
 
   LayerWithBorderRadius(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="rounded-lg"></div>`)
+    expect(css.code).toBe(`<div class="rounded-lg bg-red"></div>`)
   },
 
-  RotatedLayer: ExpectEmptyTest,
+  RotatedLayer(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="bg-green"></div>`)
+  },
 
   TransparentLayerWithBlendMode(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="opacity-25"></div>`)
-  }
+    expect(css.code).toBe(`<div class="opacity-25 bg-green"></div>`)
+  },
+
+  LayerWithShadow(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="shadow"></div>`)
+  },
+
+  LayerWithGradientFill: ExpectEmptyTest,
+
+  LayerWithFill(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="bg-blue"></div>`)
+  },
+
+  LayerWithGradientBorder: ExpectEmptyTest,
+  
+  LayerWithBorder(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="border border-green"></div>`)
+  },
 }
 
 describe('Sample Data Tests', () => {

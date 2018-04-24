@@ -42,10 +42,70 @@ function opacityToClass(tailwind, opacity) {
     return 'opacity-' + key
 }
 
+/**
+ {
+    "type": "outer",
+    "offsetX": 0,
+    "offsetY": 2,
+    "blurRadius": 4,
+    "spread": 6,
+    "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0.5
+    }
+  }
+ */
+function shadowsToClass(tailwind, layerShadows) {
+    // return if no shadows
+    if (! layerShadows[0]) return null
+    let layerShadow = layerShadows[0]
+
+    // only get the relevant shadows
+    let innerShouldBe = layerShadow.type === 'inner'
+    let shadows = _.pick(tailwind.shadows, css => {
+        let inner = css.includes('inset')
+        return inner === innerShouldBe
+    })
+
+    // Grab the blurs
+    let blurs = _.mapValues(tailwind.shadows, shadow => {
+        let parts = shadow.split(' ')
+        let idx = parts[0] === 'inset' ? 3 : 2
+
+        return parts[idx] ? parseInt(parts[idx]) : null
+    })
+
+    // business as usual
+    let key = closestKey(blurs, layerShadow.blurRadius)
+
+    if (key === 'none') return null
+
+    return key === 'default' ? 'shadow' : 'shadow-' + key
+}
+
+function backgroundClass(context, tailwind, fills) {
+    if (!fills[0] || fills[0].type !== 'color') return null
+    let fill = fills[0]
+
+    return colorToClass(context, fill.color, 'bg-')
+}
+
+function borderClass(tailwind, borders) {
+    if (!borders[0]) return null
+    let border = borders[0]
+
+    return colorToClass(context, fill.color, 'bg-')
+}
+
 function shapeLayerToCode(tailwind, context, layer) {
     let classes = [
         borderRadiusToClass(tailwind, layer.borderRadius),
-        opacityToClass(tailwind, layer.opacity)
+        opacityToClass(tailwind, layer.opacity),
+        shadowsToClass(tailwind, layer.shadows),
+        backgroundClass(context, tailwind, layer.fills),
+        borderClass(tailwind, layer.borders)
     ]
 
     return classesToCode(tailwind.screens, 'div', classes.filter(n => n))
@@ -181,12 +241,12 @@ function fontWeightTextToClass(weight) {
     return 'font-' + weight
 }
 
-function colorToClass(context, color) {
+function colorToClass(context, color, prefix) {
     let projectColor = context.project.findColorEqual(color)
     
     if (!projectColor || projectColor.name.toLowerCase() === context.getOption('color').toLowerCase()) return null
 
-    return 'text-' + projectColor.name
+    return prefix + projectColor.name
 }
 
 function readTailwindConfig(context) 
@@ -206,7 +266,7 @@ function fontAndTextClasses(tailwind, context, style)
         textAlignToClass(style.textAlign),
         letterSpacingToClass(tailwind, style.fontSize, style.letterSpacing || 0),
         fontWeightTextToClass(style.weightText),
-        colorToClass(context, style.color)
+        colorToClass(context, style.color, 'text-')
     ]
 
     return classes.filter(n => n)
