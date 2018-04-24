@@ -1,2 +1,2 @@
 #!/bin/sh
-npm start
+npx zem start
