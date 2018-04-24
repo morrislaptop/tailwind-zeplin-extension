@@ -1,5 +1,5 @@
 const ext = require('../src/lib')
-const data = require('zem/src/sample-data')
+const data = require('./sample-data')
 const { Color, Context } = require('@zeplin/extension-model')
 
 

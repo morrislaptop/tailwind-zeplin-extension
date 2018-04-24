@@ -1,5 +1,5 @@
 const ext = require('../src/lib')
-const data = require('zem/src/sample-data')
+const data = require('./sample-data')
 const { Context, TextStyle, Project } = require('@zeplin/extension-model')
 
 test('exports Tailwind components for text styles', () => {

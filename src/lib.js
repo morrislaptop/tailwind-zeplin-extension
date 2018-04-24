@@ -2,14 +2,22 @@ const s = require('string')
 const _ = require('lodash')
 const REM = 16
 
-function classesToCode(tailwind, classes) {
-    let screens = Object.keys(tailwind.screens).map(screen => {
-        return classes.map(className => screen + ':' + className).join(' ')
-    })
+function classesToElement(el, classes, content) {
+    return `<${el} class="${classes.join(' ')}">${content}</${el}>`
+}
 
-    screens.unshift(classes.join(' '))
+function classesToCode(screens, el, classes, content = '') {
+    let html = classesToElement(el, classes, content)
 
-    return screens.join("\n")
+    html = Object.keys(screens).reduce((html, screen) => {
+        let prefixed = classes.map(className => screen + ':' + className)
+        
+        html += `\n\n<!-- ${screen} -->\n` + classesToElement(el, prefixed, content)
+
+        return html
+    }, html)
+
+    return html
 }
 
 function dropTheRem(obj) {
@@ -34,31 +42,48 @@ function opacityToClass(tailwind, opacity) {
     return 'opacity-' + key
 }
 
+function shapeLayerToCode(tailwind, context, layer) {
+    let classes = [
+        borderRadiusToClass(tailwind, layer.borderRadius),
+        opacityToClass(tailwind, layer.opacity)
+    ]
+
+    return classesToCode(tailwind.screens, 'div', classes.filter(n => n))
+}
+
+function textLayerToCode(tailwind, context, layer) {
+    let tags = layer.textStyles.map(style => textStyleToCode(tailwind, context, layer, style))
+
+    return tags.join("\n")
+}
+
+function textStyleToCode(tailwind, context, layer, style) {
+    let projectStyle = context.project.findTextStyleEqual(style.textStyle)
+    let classes = projectStyle ? [s(projectStyle.name).slugify().s] : fontAndTextClasses(tailwind, context, style.textStyle)
+    let content = layer.content.substring(style.range.start, style.range.end)
+    
+    return classesToCode({}, 'p', classes, content)
+}
+
 /**
  * Export functions you want to work with, see documentation for details:
  * https://github.com/zeplin/zeplin-extension-documentation
  */
 function layer(context, layer) {
     let tailwind = readTailwindConfig(context)
-    let classes = []
 
-    // Only support for the first text style
-    if (layer.textStyles[0]) {
-        classes = classes.concat(fontAndTextClasses(tailwind, context, layer.textStyles[0].textStyle))
+    // console.log({ layer })
+    // console.log(JSON.stringify(layer))
+
+    // Call the relevant function for layer type
+    let layerToCode = {
+        text: textLayerToCode,
+        shape: shapeLayerToCode
     }
-
-    // Add each class group
-    classes = classes.concat([
-        borderRadiusToClass(tailwind, layer.borderRadius),
-        opacityToClass(tailwind, layer.opacity)
-    ])
-
-    // Remove empty classes
-    classes = classes.filter(n => n)
+    let code = layerToCode[layer.type](tailwind, context, layer)
 
     return {
-        classes, // for tests
-        code: classesToCode(tailwind, classes),
+        code,
         language: 'html'
     }
 }
@@ -184,7 +209,7 @@ function fontAndTextClasses(tailwind, context, style)
         colorToClass(context, style.color)
     ]
 
-    return classes
+    return classes.filter(n => n)
 }
 
 /**
@@ -208,7 +233,7 @@ function styleguideTextStyles(context, styles) {
 
     let components = styles.map(style => {
         let className = '.' + s(style.name).slugify().s
-        let classes = fontAndTextClasses(tailwind, context, style).filter(n => n)
+        let classes = fontAndTextClasses(tailwind, context, style)
         
         return { className, classes }
     }, {})
