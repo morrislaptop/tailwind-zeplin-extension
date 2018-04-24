@@ -95,6 +95,8 @@ That's pretty much it. Go ahead, click a layer!
 
 ## Development
 
-React Native extension is developed using [zem](https://github.com/zeplin/zem), Zeplin Extension Manager. zem is a command line tool that lets you quickly create and test extensions.
+See #1 for the list of Tailwind classes supported. 
+
+Tailwind Zeplin Extension is developed using [zem](https://github.com/zeplin/zem), Zeplin Extension Manager. zem is a command line tool that lets you quickly create and test extensions.
 
 To learn more about zem, [see documentation](https://github.com/zeplin/zem).
