@@ -95,7 +95,7 @@ That's pretty much it. Go ahead, click a layer!
 
 ## Development
 
-See #1 for the list of Tailwind classes supported. 
+See [#1](https://github.com/morrislaptop/tailwind-zeplin-extension/issues/1) for the list of Tailwind classes supported. 
 
 Tailwind Zeplin Extension is developed using [zem](https://github.com/zeplin/zem), Zeplin Extension Manager. zem is a command line tool that lets you quickly create and test extensions.
 
