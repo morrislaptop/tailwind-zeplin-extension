@@ -293,7 +293,7 @@ function fontWeightTextToClass(weight) {
 }
 
 function colorToClass(context, color, prefix) {
-    let projectColor = context.project.findColorEqual(color)
+    let projectColor = color && context.project.findColorEqual(color)
     
     if (!projectColor || projectColor.name.toLowerCase() === context.getOption('color').toLowerCase()) return null
 

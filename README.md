@@ -85,7 +85,7 @@ You can add them to your Zeplin projects locally from their Extensions window.
 
 On Mac, Windows or Web apps, holding down the Option key will enable the “Add Local Extension” option on the title bar:
 
-![Add local extension](https://github.com/zeplin/zeplin-extension-documentation/blob/master/img/addLocalExtension.png)
+![Add local extension](https://raw.githubusercontent.com/zeplin/zeplin-extension-documentation/master/img/addLocalExtension.png)
 
 After running the script, enter http://localhost:7070/manifest.json as the URL and click Add.
 
