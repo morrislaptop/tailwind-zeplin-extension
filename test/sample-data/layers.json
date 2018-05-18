@@ -108,6 +108,94 @@
     },
     {
         "type": "text",
+        "name": "Text layer with multiple styles that are the same",
+        "exportable": false,
+        "rotation": 0,
+        "opacity": 1,
+        "blendMode": "normal",
+        "borderRadius": 0,
+        "rect": {
+            "y": 44,
+            "x": 0,
+            "width": 220,
+            "height": 24
+        },
+        "content": "Type something RED",
+        "borders": [],
+        "fills": [],
+        "shadows": [],
+        "textStyles": [
+            {
+                "range": {
+                    "location": 0,
+                    "length": 4
+                },
+                "style": {
+                    "fontFace": "SFProText-Medium",
+                    "fontSize": 20,
+                    "fontWeight": 500,
+                    "fontStyle": "normal",
+                    "fontFamily": "SFProText",
+                    "fontStretch": "normal",
+                    "textAlign": "left",
+                    "weightText": "medium",
+                    "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                    }
+                }
+            },
+            {
+                "range": {
+                    "location": 5,
+                    "length": 9
+                },
+                "style": {
+                    "fontFace": "SFProText-Medium",
+                    "fontSize": 20,
+                    "fontWeight": 500,
+                    "fontStyle": "normal",
+                    "fontFamily": "SFProText",
+                    "fontStretch": "normal",
+                    "textAlign": "left",
+                    "weightText": "medium",
+                    "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                    }
+                }
+            },
+            {
+                "range": {
+                    "location": 15,
+                    "length": 3
+                },
+                "style": {
+                    "fontFace": "SFProText-Medium",
+                    "fontSize": 20,
+                    "fontWeight": 500,
+                    "fontStyle": "normal",
+                    "fontFamily": "SFProText",
+                    "fontStretch": "normal",
+                    "textAlign": "left",
+                    "weightText": "medium",
+                    "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                    }
+                }
+            }
+        ],
+        "assets": []
+    },
+    {
+        "type": "text",
         "name": "Text layer",
         "exportable": false,
         "rotation": 0,

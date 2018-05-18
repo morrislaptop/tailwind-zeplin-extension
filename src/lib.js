@@ -144,8 +144,26 @@ function shapeLayerToCode(tailwind, context, layer) {
     return classesToCode(tailwind.screens, 'div', classes.filter(n => n))
 }
 
-function textLayerToCode(tailwind, context, layer) {
-    let tags = layer.textStyles.map(style => textStyleToCode(tailwind, context, layer, style))
+function combineTextLayersWithTheSameClasses(tailwind, context, textStyles)
+{
+    return Object.values(textStyles.reduce((obj, style) => {
+        let classes = fontAndTextClasses(tailwind, context, style.textStyle).join(' ')
+
+        if (obj[classes]) {
+            obj[classes].range.end = style.range.end
+        }
+        else {
+            obj[classes] = style
+        }
+
+        return obj
+    }, {}))
+}
+
+function textLayerToCode(tailwind, context, layer) {    
+    let textStyles = combineTextLayersWithTheSameClasses(tailwind, context, layer.textStyles)
+
+    let tags = textStyles.map(style => textStyleToCode(tailwind, context, layer, style))
 
     return tags.join("\n")
 }

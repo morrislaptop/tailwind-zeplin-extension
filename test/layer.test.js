@@ -24,6 +24,12 @@ let tests = {
 <p class="sample-text-style-with-color uppercase">RED</p>`)
   },
 
+  TextLayerWithMultipleStylesThatAreTheSame(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<p class="text-xl font-medium">Type something RED</p>`)
+  },
+
   TextLayer(context, layer) {
     let css = ext.layer(context, layer)
 
