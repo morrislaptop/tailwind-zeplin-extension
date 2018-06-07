@@ -31,7 +31,7 @@ function borderRadiusToClass(tailwind, radius) {
 
     if (size === 'none') return null
 
-    return 'rounded-' + size
+    return size === 'default' ? 'rounded' : 'rounded-' + size
 }
 
 function opacityToClass(tailwind, opacity) {
@@ -99,9 +99,9 @@ function borderClass(tailwind, borders) {
     let sizes = dropTheRem(tailwind.borderWidths)
     let key = closestKey(sizes, border.thickness)
 
-    if (key === 'default') return null
+    if (key === '0') return null
 
-    return 'border-' + key
+    return key === 'default' ? 'border' : 'border-' + key
 }
 
 function borderColor(context, tailwind, borders) {
@@ -291,7 +291,7 @@ function lineHeightToClass(tailwind, size, height) {
 function textAlignToClass(align) {
     if (! align || align === 'left') return null
 
-    return 'font-' + align
+    return 'text-' + align
 }
 
 function letterSpacingToClass(tailwind, size, spacing) {

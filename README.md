@@ -100,3 +100,5 @@ See [#1](https://github.com/morrislaptop/tailwind-zeplin-extension/issues/1) for
 Tailwind Zeplin Extension is developed using [zem](https://github.com/zeplin/zem), Zeplin Extension Manager. zem is a command line tool that lets you quickly create and test extensions.
 
 To learn more about zem, [see documentation](https://github.com/zeplin/zem).
+
+To run tests and show skipped - `yarn test --verbose --expand` 

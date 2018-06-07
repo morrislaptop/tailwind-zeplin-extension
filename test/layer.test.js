@@ -20,8 +20,8 @@ let tests = {
     let css = ext.layer(context, layer)
 
     expect(css.code).toBe(`<p class="text-xl font-medium">Type</p>
-<p class="text-xl text-green">something</p>
-<p class="sample-text-style-with-color uppercase">RED</p>`)
+<p class="text-xl text-center text-green">something</p>
+<p class="text-xl text-right text-red uppercase">RED</p>`)
   },
 
   TextLayerWithMultipleStylesThatAreTheSame(context, layer) {
@@ -48,10 +48,16 @@ let tests = {
     expect(css.code).toBe(`<div class="bg-yellow max-w-xs"></div>`)
   },
 
-  LayerWithBorderRadius(context, layer) {
+  LayerWithLargeBorderRadius(context, layer) {
     let css = ext.layer(context, layer)
 
     expect(css.code).toBe(`<div class="rounded-lg bg-red max-w-xs"></div>`)
+  },
+
+  LayerWithDefaultBorderRadius(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="rounded bg-red max-w-xs"></div>`)
   },
 
   RotatedLayer(context, layer) {
