@@ -1,5 +1,7 @@
 const s = require('string')
 const _ = require('lodash')
+const rgbHex = require('rgb-hex')
+const nearestColor = require('nearest-color')
 const REM = 16
 
 function classesToElement(el, classes, content) {
@@ -311,11 +313,35 @@ function fontWeightTextToClass(weight) {
 }
 
 function colorToClass(context, color, prefix) {
-    let projectColor = color && context.project.findColorEqual(color)
+    let projectColor = findClosestColour(context, color)
     
     if (!projectColor || projectColor.name.toLowerCase() === context.getOption('color').toLowerCase()) return null
 
     return prefix + projectColor.name
+}
+
+function findClosestColour(context, color) {
+    if (! color) return
+    // return color && context.project.findColorEqual(color)
+
+    // Convert to object the nearestColor library understands
+    let colors = context.project.colors.reduce((obj, color) => {
+        obj[color.name] = '#' + rgbHex(color.r, color.g, color.b)
+        return obj
+    }, {})
+
+    // Find the closest
+    let closest = nearestColor.from(colors)('#' + rgbHex(color.r, color.g, color.b))
+    
+    // Return if it's too far away...
+    let max = context.getOption('maxColorDistance') || 0
+    if (! closest || closest.distance > max) return
+
+    // Find the original project colour
+    let rgb = closest.rgb
+    let projectColour = context.project.colors.find(color => color.r == rgb.r && color.g == rgb.g && color.b == rgb.b)
+
+    return projectColour
 }
 
 function readTailwindConfig(context) 

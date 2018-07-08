@@ -101,6 +101,12 @@ let tests = {
 
     expect(css.code).toBe(`<div class="border-2 border-green max-w-xs"></div>`)
   },
+
+  LayerWithSlightlyDifferentColour(context, layer) {
+    let css = ext.layer(context, layer)
+
+    expect(css.code).toBe(`<div class="bg-yellow max-w-xs"></div>`)
+  }
 }
 
 describe('Sample Data Tests', () => {
@@ -110,7 +116,7 @@ describe('Sample Data Tests', () => {
   let tailwind = require('../src/tailwind-config.json')
   tailwind.screens = { }
   let project = new Project(data.project)
-  let context = new Context({ project, options: { font: 'SFProText', color: 'black', tailwind: JSON.stringify(tailwind) }})
+  let context = new Context({ project, options: { font: 'SFProText', color: 'black', maxColorDistance: "50", tailwind: JSON.stringify(tailwind) }})
 
   /**
    * Runs through each sample layer and calls the function to test it

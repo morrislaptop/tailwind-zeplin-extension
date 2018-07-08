@@ -4349,6 +4349,10 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
+nearest-color@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/nearest-color/-/nearest-color-0.4.2.tgz#6ebd3a859969e76dd834e609beeecef73c3881e0"
+
 needle@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.2.0.tgz#f14efc69cee1024b72c8b21c7bdf94a731dc12fa"
@@ -5338,6 +5342,10 @@ ret@~0.1.10:
 retry@^0.10.0:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.10.1.tgz#e76388d217992c252750241d3d3956fed98d8ff4"
+
+rgb-hex@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/rgb-hex/-/rgb-hex-2.1.0.tgz#c773c5fe2268a25578d92539a82a7a5ce53beda6"
 
 rgb-regex@^1.0.1:
   version "1.0.1"

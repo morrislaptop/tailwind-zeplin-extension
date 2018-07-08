@@ -764,5 +764,33 @@
         "shadows": [],
         "textStyles": [],
         "assets": []
+    },
+    {
+        "type": "shape",
+        "name": "Layer with slightly different colour",
+        "fills": [
+            {
+                "type": "color",
+                "blendMode": "normal",
+                "fill": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 1,
+                    "a": 1
+                },
+                "color": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 1,
+                    "a": 1
+                }
+            }
+        ],
+        "opacity": 1,
+        "rect": {},
+        "borders": [],
+        "shadows": [],
+        "textStyles": [],
+        "assets": []
     }
 ]

@@ -1,6 +1,7 @@
 {
   "name": "tailwind-zeplin-extension",
   "version": "0.0.0-development",
+  "license": "MIT",
   "description": "Utilities to generate Tailwind Config and classes for your components.",
   "repository": "https://github.com/morrislaptop/tailwind-zeplin-extension.git",
   "bin": "./cli.js",
@@ -35,6 +36,12 @@
         "type": "text",
         "id": "color",
         "default": ""
+      },
+      {
+        "name": "Max Color Distance",
+        "type": "text",
+        "id": "maxColorDistance",
+        "default": "50"
       }
     ]
   },
@@ -42,6 +49,8 @@
     "css": "^2.2.1",
     "css-shorthand-expand": "^1.2.0",
     "lodash": "^4.17.5",
+    "nearest-color": "^0.4.2",
+    "rgb-hex": "^2.1.0",
     "string": "^3.3.3",
     "zem": "^0.1.2"
   },

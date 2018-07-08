@@ -15,7 +15,8 @@ test('exports Tailwind components for text styles', () => {
     project,
     options: {
       font: 'Ubuntu',
-      color: 'black'
+      color: 'black',
+      maxColorDistance: "50",
     }
   })
 
@@ -52,6 +53,7 @@ test('reads the Tailwing config for things', () => {
     options: {
       font: 'Ubuntu',
       color: 'black',
+      maxColorDistance: "50",
       tailwind: JSON.stringify(tailwind)
     }
   })
