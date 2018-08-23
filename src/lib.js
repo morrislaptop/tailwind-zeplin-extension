@@ -8,11 +8,13 @@ function classesToElement(el, classes, content) {
     return `<${el} class="${classes.join(' ')}">${content}</${el}>`
 }
 
-function classesToCode(screens, el, classes, content = '') {
+function classesToCode(screens, el, classes, content = '', context) {
+    let prefix = readPrefix(context)
+    let separator = readSeparator(context)
     let html = classesToElement(el, classes, content)
 
     html = Object.keys(screens).reduce((html, screen) => {
-        let prefixed = classes.map(className => screen + ':' + className)
+        let prefixed = classes.map(className => screen + separator + prefix + className)
         
         html += `\n\n<!-- ${screen} -->\n` + classesToElement(el, prefixed, content)
 
@@ -143,7 +145,7 @@ function shapeLayerToCode(tailwind, context, layer) {
         minHeightClass(tailwind, layer.rect),
     ]
 
-    return classesToCode(tailwind.screens, 'div', classes.filter(n => n))
+    return classesToCode(tailwind.screens, 'div', classes.filter(n => n), '', context)
 }
 
 function combineTextLayersWithTheSameClasses(tailwind, context, textStyles)
@@ -193,7 +195,7 @@ function textStyleToCode(tailwind, context, layer, style) {
         contentToTruncateClass(content)
     ]).filter(n => n)
     
-    return classesToCode({}, 'p', classes, content)
+    return classesToCode({}, 'p', classes, content, context)
 }
 
 /**
@@ -349,6 +351,18 @@ function readTailwindConfig(context)
     let js = context.getOption('tailwind')
 
     return js ? JSON.parse(js) : require('./tailwind-config.json')
+}
+
+function readPrefix(context)
+{
+    return readTailwindConfig(context).options.prefix
+}
+
+function readSeparator(context)
+{
+    let separator = readTailwindConfig(context).options.separator
+
+    return separator ? separator : ":" 
 }
 
 function fontAndTextClasses(tailwind, context, style)
