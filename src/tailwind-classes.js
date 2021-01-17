@@ -196,5 +196,7 @@ export function rotateToClass(tailwind, rotate) {
     let rotations = dropTheRem(tailwind.theme.rotate)
     let rotation = closestKey(rotations, rotate)
 
-    return 'rotate-' + rotation
+    if (rotation === '0') return null
+
+    return rotation.includes('-') ? '-rotate-' + Math.abs(rotation) : 'rotate-' + rotation
 }

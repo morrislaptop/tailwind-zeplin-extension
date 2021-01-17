@@ -63,7 +63,7 @@ let tests = {
   RotatedLayer(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="bg-green max-w-xs"></div>`)
+    expect(css.code).toBe(`<div class="bg-green max-w-xs -rotate-45"></div>`)
   },
 
   TransparentLayerWithBlendMode(context, layer) {
