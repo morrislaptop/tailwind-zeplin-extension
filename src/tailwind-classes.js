@@ -1,5 +1,5 @@
-import _ from 'lodash'
 import s from 'string'
+import _ from 'lodash'
 import {
     colorToClass,
     dropTheRem,

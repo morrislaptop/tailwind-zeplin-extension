@@ -41,7 +41,7 @@ test('exports Tailwind components for text styles', () => {
     expect(css.code).toBe(expected)
 });
 
-test('reads the Tailwing config for things', () => {
+test('reads the Tailwind config for things', () => {
 
   // Arrange.
   let project = new Project(data.project)

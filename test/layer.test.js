@@ -110,13 +110,14 @@ let tests = {
 }
 
 describe('Sample Data Tests', () => {
+
   /**
    * Setup our project
    */
   let tailwind = require('../src/tailwind-config.json')
   tailwind.screens = { }
   let project = new Project(data.project)
-  let context = new Context({ project, options: { font: 'SFProText', color: 'black', maxColorDistance: "50", tailwind: JSON.stringify(tailwind) }})
+  let context = new Context({ project, options: { font: 'SFProText', color: 'black', maxColorDistance: '50', tailwind: JSON.stringify(tailwind) }})
 
   /**
    * Runs through each sample layer and calls the function to test it
@@ -136,7 +137,7 @@ test('outputs responsive classes as well for shape elements', () => {
   let context = new Context({ project, options: { tailwind: JSON.stringify(tailwind) }})
 
   // Act.
-  let layer = new Layer({ type: "shape", rect: { width: 320, height: 768 }, borders: [], fills: [], shadows: [] })
+  let layer = new Layer({ type: "shape", rect: { width: 320, height: 768 }, borders: [], fills: [], shadows: [], assets: [] })
   let css = ext.layer(context, layer)
 
   // Assert.
