@@ -46,16 +46,16 @@
     ]
   },
   "dependencies": {
-    "css": "^2.2.1",
+    "css": "^2.2.4",
     "css-shorthand-expand": "^1.2.0",
-    "lodash": "^4.17.5",
-    "nearest-color": "^0.4.2",
+    "lodash": "^4.17.20",
+    "nearest-color": "^0.4.4",
     "rgb-hex": "^2.1.0",
     "string": "^3.3.3",
     "zem": "^1.1.0"
   },
   "devDependencies": {
-    "@zeplin/extension-model": "^1.2.0",
+    "@zeplin/extension-model": "^2.9.0",
     "jest": "^26.6.3",
     "semantic-release": "^17.3.3"
   }
