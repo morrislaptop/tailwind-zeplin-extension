@@ -13,7 +13,7 @@ let tests = {
   SampleScreen(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe('<div class="max-w-xs min-h-lg"></div>')
+    expect(css.code).toBe('<div class="max-w-xs"></div>')
   },
 
   TextLayerWithMultipleStyles(context, layer) {
@@ -115,7 +115,7 @@ describe('Sample Data Tests', () => {
    * Setup our project
    */
   let tailwind = require('../src/tailwind-config.json')
-  tailwind.screens = { }
+  tailwind.theme.screens = { }
   let project = new Project(data.project)
   let context = new Context({ project, options: { font: 'SFProText', color: 'black', maxColorDistance: '50', tailwind: JSON.stringify(tailwind) }})
 
@@ -132,12 +132,12 @@ describe('Sample Data Tests', () => {
 test('outputs responsive classes as well for shape elements', () => {
   // Arrange.
   let tailwind = require('../src/tailwind-config.json')
-  tailwind.screens = { "sm": "576px" }
+  tailwind.theme.screens = { 'sm': '640px' }
   let project = new Project(data.project)
   let context = new Context({ project, options: { tailwind: JSON.stringify(tailwind) }})
 
   // Act.
-  let layer = new Layer({ type: "shape", rect: { width: 320, height: 768 }, borders: [], fills: [], shadows: [], assets: [] })
+  let layer = new Layer({ type: 'shape', rect: { width: 320, height: 768 }, borders: [], fills: [], shadows: [], assets: [] })
   let css = ext.layer(context, layer)
 
   // Assert.

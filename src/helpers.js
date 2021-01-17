@@ -10,7 +10,7 @@ import {
     borderClass,
     borderColor,
     maxWidthClass,
-    minHeightClass,
+    // minHeightClass,
     fontSizeToClass,
     fontStyleToClass,
     fontFamilyToClass,
@@ -20,6 +20,7 @@ import {
     fontWeightTextToClass,
     contentToTruncateClass,
     contentToTransformClass,
+    rotateToClass,
 } from './tailwind-classes'
 
 /**
@@ -56,10 +57,11 @@ export function shapeLayerToCode(tailwind, context, layer) {
         borderClass(tailwind, layer.borders),
         borderColor(context, tailwind, layer.borders),
         maxWidthClass(tailwind, layer.rect),
-        minHeightClass(tailwind, layer.rect),
+        rotateToClass(tailwind, layer.rotation),
+        // minHeightClass(tailwind, layer.rect),
     ]
 
-    return classesToCode(tailwind.screens, 'div', classes.filter(n => n))
+    return classesToCode(tailwind.theme.screens, 'div', classes.filter(n => n))
 }
 
 export function combineTextLayersWithTheSameClasses(tailwind, context, textStyles) {

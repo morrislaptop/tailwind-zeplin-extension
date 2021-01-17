@@ -325,7 +325,7 @@
         "rotation": 0,
         "opacity": 1,
         "blendMode": "normal",
-        "borderRadius": 20,
+        "borderRadius": 8,
         "rect": {
             "y": 410,
             "x": 50,
@@ -492,7 +492,7 @@
                 "type": "outer",
                 "offsetX": 0,
                 "offsetY": 2,
-                "blurRadius": 4,
+                "blurRadius": 3,
                 "spread": 6,
                 "color": {
                     "r": 0,

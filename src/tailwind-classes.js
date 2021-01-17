@@ -10,7 +10,7 @@ const REM = 16
 
 export function borderRadiusToClass(tailwind, radius) {
     let ratio = radius / REM
-    let sizes = dropTheRem(tailwind.borderRadius)
+    let sizes = dropTheRem(tailwind.theme.borderRadius)
     let size = closestKey(sizes, ratio)
 
     if (size === 'none') return null
@@ -19,7 +19,7 @@ export function borderRadiusToClass(tailwind, radius) {
 }
 
 export function opacityToClass(tailwind, opacity) {
-    let key = closestKey(tailwind.opacity, opacity)
+    let key = closestKey(tailwind.theme.opacity, opacity)
 
     if (key === '100') return null
 
@@ -45,16 +45,19 @@ export function shadowsToClass(tailwind, layerShadows) {
     // return if no shadows
     if (!layerShadows[0]) return null
     let layerShadow = layerShadows[0]
+    let shadows = tailwind.theme.boxShadow;
 
     // only get the relevant shadows
     let innerShouldBe = layerShadow.type === 'inner'
-    let shadows = _.pick(tailwind.shadows, css => {
-        let inner = css.includes('inset')
-        return inner === innerShouldBe
-    })
+    if (innerShouldBe) {
+        shadows = _.pick(shadows, css => {
+            let inner = css.includes('inset')
+            return inner === innerShouldBe
+        })
+    }
 
     // Grab the blurs
-    let blurs = _.mapValues(tailwind.shadows, shadow => {
+    let blurs = _.mapValues(shadows, shadow => {
         let parts = shadow.split(' ')
         let idx = parts[0] === 'inset' ? 3 : 2
 
@@ -64,7 +67,7 @@ export function shadowsToClass(tailwind, layerShadows) {
     // business as usual
     let key = closestKey(blurs, layerShadow.blurRadius)
 
-    if (key === 'none') return null
+    if (key === 'none' || typeof key === 'undefined') return null
 
     return key === 'default' ? 'shadow' : 'shadow-' + key
 }
@@ -80,7 +83,7 @@ export function borderClass(tailwind, borders) {
     if (!borders[0]) return null
     let border = borders[0]
 
-    let sizes = dropTheRem(tailwind.borderWidths)
+    let sizes = dropTheRem(tailwind.theme.borderWidth)
     let key = closestKey(sizes, border.thickness)
 
     if (key === '0') return null
@@ -97,21 +100,25 @@ export function borderColor(context, tailwind, borders) {
 
 export function maxWidthClass(tailwind, { width }) {
     let ratio = width / REM
-    let widths = dropTheRem(tailwind.maxWidth)
+    let widths = dropTheRem(tailwind.theme.maxWidth)
+
+    // Remove unwanted properties
+    _.unset(widths, 'none')
+
     let key = closestKey(widths, ratio)
 
     return 'max-w-' + key
 }
 
-export function minHeightClass(tailwind, { height }) {
-    let ratio = height / REM
-    let heights = dropTheRem(tailwind.minHeight)
-    let key = closestKey(heights, ratio)
+// export function minHeightClass(tailwind, { height }) {
+//     let ratio = height / REM
+//     let heights = dropTheRem(tailwind.theme.minHeight)
+//     let key = closestKey(heights, ratio)
 
-    if (key === '0') return null
+//     if (key === '0') return null
 
-    return 'min-h-' + key
-}
+//     return 'min-h-' + key
+// }
 
 export function contentToTransformClass(content) {
     if (content !== content.toUpperCase()) return null
@@ -134,7 +141,7 @@ export function fontFamilyToClass(context, family) {
 
 export function fontSizeToClass(tailwind, fontSize) {
     let ratio = fontSize / REM
-    let sizes = dropTheRem(tailwind.textSizes)
+    let sizes = dropTheRem(tailwind.theme.fontSize)
     let size = closestKey(sizes, ratio)
 
     if (size === 'base') return null
@@ -156,9 +163,9 @@ export function fontStyleToClass(style) {
 
 export function lineHeightToClass(tailwind, size, height) {
     let ratio = height / size
-    let leading = closestKey(tailwind.leading, ratio)
+    let leading = closestKey(tailwind.theme.lineHeight, ratio)
 
-    if (leading === 'none') return null
+    if (leading === 'none' || size === height) return null
 
     return 'leading-' + leading
 }
@@ -171,7 +178,7 @@ export function textAlignToClass(align) {
 
 export function letterSpacingToClass(tailwind, size, spacing) {
     let ratio = spacing / size
-    let trackings = dropTheRem(tailwind.tracking)
+    let trackings = dropTheRem(tailwind.theme.letterSpacing)
     let tracking = closestKey(trackings, ratio)
 
     if (tracking === 'normal') return null
@@ -183,6 +190,13 @@ export function fontWeightTextToClass(weight) {
     if (weight === 'regular') return null
 
     return 'font-' + weight
+}
+
+export function rotateToClass(tailwind, rotate) {
+    let rotations = dropTheRem(tailwind.theme.rotate)
+    let rotation = closestKey(rotations, rotate)
+
+    return 'rotate-' + rotation
 }
 
 // export default {
