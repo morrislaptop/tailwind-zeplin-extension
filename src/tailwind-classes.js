@@ -198,25 +198,3 @@ export function rotateToClass(tailwind, rotate) {
 
     return 'rotate-' + rotation
 }
-
-// export default {
-//     borderRadiusToClass,
-//     opacityToClass,
-//     shadowsToClass,
-//     backgroundClass,
-//     borderClass,
-//     borderColor,
-//     maxWidthClass,
-//     minHeightClass,
-//     contentToTransformClass,
-//     contentToTruncateClass,
-//     fontFamilyToClass,
-//     fontSizeToClass,
-//     fontWeightToClass,
-//     fontStyleToClass,
-//     lineHeightToClass,
-//     textAlignToClass,
-//     letterSpacingToClass,
-//     fontWeightTextToClass,
-//     borderClass,
-// }
