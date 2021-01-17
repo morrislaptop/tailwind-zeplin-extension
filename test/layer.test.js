@@ -1,7 +1,7 @@
-const ext = require('../src/lib')
-const data = require('./sample-data')
-const s = require('string')
-const { Context, Layer, Project } = require('@zeplin/extension-model')
+import ext from '../src/index'
+import data from './sample-data'
+import s from 'string'
+import { Context, Layer, Project } from "@zeplin/extension-model";
 
 function ExpectEmptyTest(context, layer) {
   let css = ext.layer(context, layer)
@@ -12,7 +12,7 @@ function ExpectEmptyTest(context, layer) {
 let tests = {
   SampleScreen(context, layer) {
     let css = ext.layer(context, layer)
-  
+
     expect(css.code).toBe('<div class="max-w-xs min-h-lg"></div>')
   },
 
@@ -95,7 +95,7 @@ let tests = {
 
     expect(css.code).toBe(`<div class="border-4 max-w-xs"></div>`)
   },
-  
+
   LayerWithBorder(context, layer) {
     let css = ext.layer(context, layer)
 
@@ -123,7 +123,7 @@ describe('Sample Data Tests', () => {
    */
   data.layers.forEach(layer => {
     let fn = s(layer.name).camelize().s
-    
+
     tests[fn] ? test(layer.name, () => tests[fn](context, new Layer(layer))) : xtest(layer.name)
   })
 })

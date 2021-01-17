@@ -1,22 +1,22 @@
-const ext = require('../src/lib')
-const data = require('./sample-data')
-const { Context, TextStyle, Project } = require('@zeplin/extension-model')
+import ext from '../src/index'
+import data from './sample-data'
+import { Context, Project, TextStyle } from "@zeplin/extension-model";
 
 test('exports Tailwind components for text styles', () => {
 
   // Arrange.
   let textStyles = data.project.textStyles
-  
+
   textStyles.push({"name":"H1","fontFace":"Ubuntu-Light","fontSize":36,"fontWeight":300,"fontStyle":"normal","fontFamily":"Ubuntu","fontStretch":"normal","weightText":"light","color":{"r":77,"g":77,"b":77,"a":1}})
   textStyles.push({"name":"Lead","fontFace":"Ubuntu-Italic","fontSize":18,"fontWeight":400,"fontStyle":"oblique","fontFamily":"Ubuntu","fontStretch":"normal","letterSpacing":0,"weightText":"regular","color":{"r":77,"g":77,"b":77,"a":1}})
 
   let project = new Project(data.project)
-  let context = new Context({ 
+  let context = new Context({
     project,
     options: {
       font: 'Ubuntu',
       color: 'black',
-      maxColorDistance: "50",
+      maxColorDistance: '50',
     }
   })
 
@@ -48,7 +48,7 @@ test('reads the Tailwing config for things', () => {
   let tailwind = require('../src/tailwind-config.json')
   tailwind.textSizes.base = "2.25rem"
 
-  let context = new Context({ 
+  let context = new Context({
     project,
     options: {
       font: 'Ubuntu',

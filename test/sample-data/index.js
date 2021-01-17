@@ -1,7 +1,7 @@
-const project = require("./project.json");
-const layers = require("./layers.json");
+import project from './project.json'
+import layers from './layers.json'
 
-module.exports = {
+export default {
     project,
-    layers
-};
+    layers,
+}
