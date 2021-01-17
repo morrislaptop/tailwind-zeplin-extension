@@ -70,7 +70,7 @@ Specify your default colour here and it will be excluded from the generated clas
 
 ## Usage
 
-    git clone https://github.com/damchtlv/tailwind-zeplin-extension.git
+    git clone https://github.com/DamChtlv/tailwind-zeplin-extension.git
     cd tailwind-zeplin-extension
     yarn # or npm install
     yarn start
