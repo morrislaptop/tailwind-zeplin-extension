@@ -10,7 +10,8 @@
     "build": "zem build",
     "clean": "zem clean",
     "exec": "zem exec",
-    "test": "jest",
+    "test": "zem test",
+    "publish": "zem publish",
     "prepublishOnly": "yarn build"
   },
   "zeplin": {
@@ -46,10 +47,12 @@
     ]
   },
   "dependencies": {
+    "core-js": "^3.8.2",
     "css": "^2.2.4",
     "css-shorthand-expand": "^1.2.0",
     "lodash": "^4.17.20",
     "nearest-color": "^0.4.4",
+    "regenerator-runtime": "^0.13.7",
     "rgb-hex": "^2.1.0",
     "string": "^3.3.3",
     "zem": "^1.1.0"
