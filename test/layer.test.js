@@ -1,7 +1,7 @@
-const ext = require('../src/lib')
-const data = require('./sample-data')
-const s = require('string')
-const { Context, Layer, Project } = require('@zeplin/extension-model')
+import ext from '../src/index'
+import data from './sample-data'
+import s from 'string'
+import { Context, Layer, Project } from "@zeplin/extension-model";
 
 function ExpectEmptyTest(context, layer) {
   let css = ext.layer(context, layer)
@@ -12,8 +12,8 @@ function ExpectEmptyTest(context, layer) {
 let tests = {
   SampleScreen(context, layer) {
     let css = ext.layer(context, layer)
-  
-    expect(css.code).toBe('<div class="max-w-xs min-h-lg"></div>')
+
+    expect(css.code).toBe('<div class="max-w-xs"></div>')
   },
 
   TextLayerWithMultipleStyles(context, layer) {
@@ -63,7 +63,7 @@ let tests = {
   RotatedLayer(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="bg-green max-w-xs"></div>`)
+    expect(css.code).toBe(`<div class="bg-green max-w-xs -rotate-45"></div>`)
   },
 
   TransparentLayerWithBlendMode(context, layer) {
@@ -81,7 +81,7 @@ let tests = {
   LayerWithGradientFill(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="max-w-xs"></div>`)
+    expect(css.code).toBe(`<div class="max-w-xs bg-gradient-to-t from-white"></div>`)
   },
 
   LayerWithFill(context, layer) {
@@ -95,7 +95,7 @@ let tests = {
 
     expect(css.code).toBe(`<div class="border-4 max-w-xs"></div>`)
   },
-  
+
   LayerWithBorder(context, layer) {
     let css = ext.layer(context, layer)
 
@@ -110,20 +110,21 @@ let tests = {
 }
 
 describe('Sample Data Tests', () => {
+
   /**
    * Setup our project
    */
   let tailwind = require('../src/tailwind-config.json')
-  tailwind.screens = { }
+  tailwind.theme.screens = {}
   let project = new Project(data.project)
-  let context = new Context({ project, options: { font: 'SFProText', color: 'black', maxColorDistance: "50", tailwind: JSON.stringify(tailwind) }})
+  let context = new Context({ project, options: { font: 'SFProText', color: 'black', maxColorDistance: '50', tailwind: JSON.stringify(tailwind) }})
 
   /**
    * Runs through each sample layer and calls the function to test it
    */
   data.layers.forEach(layer => {
     let fn = s(layer.name).camelize().s
-    
+
     tests[fn] ? test(layer.name, () => tests[fn](context, new Layer(layer))) : xtest(layer.name)
   })
 })
@@ -131,12 +132,12 @@ describe('Sample Data Tests', () => {
 test('outputs responsive classes as well for shape elements', () => {
   // Arrange.
   let tailwind = require('../src/tailwind-config.json')
-  tailwind.screens = { "sm": "576px" }
+  tailwind.theme.screens = { 'sm': '640px' }
   let project = new Project(data.project)
   let context = new Context({ project, options: { tailwind: JSON.stringify(tailwind) }})
 
   // Act.
-  let layer = new Layer({ type: "shape", rect: { width: 320, height: 768 }, borders: [], fills: [], shadows: [] })
+  let layer = new Layer({ type: 'shape', rect: { width: 320, height: 768 }, borders: [], fills: [], shadows: [], assets: [] })
   let css = ext.layer(context, layer)
 
   // Assert.

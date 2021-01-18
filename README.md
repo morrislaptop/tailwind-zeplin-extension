@@ -1,6 +1,6 @@
 # Tailwind Zeplin Extension
 
-Utilities to generate Tailwind Config and classes for your design.
+Utilities to generate **Tailwind Config _(support v1.9.6)_** and classes for your design.
 
 Sample colors output:
 ```js
@@ -29,28 +29,28 @@ Sample text layer output:
 
 ```html
 <p class="large-blue">Get paid for business introductions!</p>
-<p class="text-4xl font-ubuntu leading-normal font-medium text-greyish-brown">Receive loads of high-level business introductions to new clients, investors and job candidates!</p>
+<p class="text-4xl font-ubuntu leading-normal font-medium">Receive loads of high-level business introductions to new clients, investors and job candidates!</p>
 ```
 
 Sample shape layer output:
 
 ```html
-<div class="rounded-default shadow bg-white max-w-2xl min-h-xs"></div>
+<div class="rounded shadow bg-white max-w-2xl"></div>
 <!-- sm -->
-<div class="sm:rounded-default sm:shadow sm:bg-white sm:max-w-2xl sm:min-h-xs"></div>
+<div class="sm:rounded sm:shadow sm:bg-white sm:max-w-2xl"></div>
 <!-- md -->
-<div class="md:rounded-default md:shadow md:bg-white md:max-w-2xl md:min-h-xs"></div>
+<div class="md:rounded md:shadow md:bg-white md:max-w-2xl"></div>
 <!-- lg -->
-<div class="lg:rounded-default lg:shadow lg:bg-white lg:max-w-2xl lg:min-h-xs"></div>
+<div class="lg:rounded lg:shadow lg:bg-white lg:max-w-2xl"></div>
 <!-- xl -->
-<div class="xl:rounded-default xl:shadow xl:bg-white xl:max-w-2xl xl:min-h-xs"></div>
+<div class="xl:rounded xl:shadow xl:bg-white xl:max-w-2xl"></div>
 ```
 
 ## Options
 
 ### Tailwind Config
 
-If this isn't supplied, the default Tailwind config will be used. If you've customised the config you can import it to generate appropriate classes for your project. 
+If this isn't supplied, the default Tailwind config will be used. If you've customised the config you can import it to generate appropriate classes for your project.
 
 To export your current config, add the following lines to the bottom of your `tailwind-config.js`:
 
@@ -62,7 +62,7 @@ Then copy and paste the JSON into the settings area, you can then delete the abo
 
 ### Default Font
 
-Specify your default font here and it will be excluded from the generated classes. 
+Specify your default font here and it will be excluded from the generated classes.
 
 ### Default Colour
 
@@ -70,13 +70,7 @@ Specify your default colour here and it will be excluded from the generated clas
 
 ## Usage
 
-If you have node >= 5.2.0, use `npx`:
-
-    npx tailwind-zeplin-extension start
-
-Otherwise:
-
-    git clone https://github.com/morrislaptop/tailwind-zeplin-extension.git
+    git clone https://github.com/DamChtlv/tailwind-zeplin-extension.git
     cd tailwind-zeplin-extension
     yarn # or npm install
     yarn start
@@ -95,10 +89,15 @@ That's pretty much it. Go ahead, click a layer!
 
 ## Development
 
-See [#1](https://github.com/morrislaptop/tailwind-zeplin-extension/issues/1) for the list of Tailwind classes supported. 
+See [#1](https://github.com/morrislaptop/tailwind-zeplin-extension/issues/1) for the list of Tailwind classes supported.
 
 Tailwind Zeplin Extension is developed using [zem](https://github.com/zeplin/zem), Zeplin Extension Manager. zem is a command line tool that lets you quickly create and test extensions.
 
 To learn more about zem, [see documentation](https://github.com/zeplin/zem).
 
-To run tests and show skipped - `yarn test --verbose --expand` 
+To run tests and show skipped - `yarn test --verbose --expand`
+
+## Credits
+
+This repo is just a fork that i updated to make it work with latest Tailwind classes & config used in Zeplin.
+Most of the code is from [@morrislaptop/tailwind-zeplin-extension](https://github.com/morrislaptop/tailwind-zeplin-extension)

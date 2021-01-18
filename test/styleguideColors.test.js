@@ -1,6 +1,6 @@
-const ext = require('../src/lib')
-const data = require('./sample-data')
-const { Color, Context } = require('@zeplin/extension-model')
+import ext from '../src/index'
+import data from './sample-data'
+import { Color } from "@zeplin/extension-model";
 
 
 test('exports JS to set the colors array', () => {

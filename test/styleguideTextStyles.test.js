@@ -1,30 +1,61 @@
-const ext = require('../src/lib')
-const data = require('./sample-data')
-const { Context, TextStyle, Project } = require('@zeplin/extension-model')
+import ext from '../src/index'
+import data from './sample-data'
+import { Context, Project, TextStyle } from "@zeplin/extension-model";
 
 test('exports Tailwind components for text styles', () => {
 
-  // Arrange.
-  let textStyles = data.project.textStyles
-  
-  textStyles.push({"name":"H1","fontFace":"Ubuntu-Light","fontSize":36,"fontWeight":300,"fontStyle":"normal","fontFamily":"Ubuntu","fontStretch":"normal","weightText":"light","color":{"r":77,"g":77,"b":77,"a":1}})
-  textStyles.push({"name":"Lead","fontFace":"Ubuntu-Italic","fontSize":18,"fontWeight":400,"fontStyle":"oblique","fontFamily":"Ubuntu","fontStretch":"normal","letterSpacing":0,"weightText":"regular","color":{"r":77,"g":77,"b":77,"a":1}})
+    // Arrange.
+    let textStyles = data.project.textStyles
 
-  let project = new Project(data.project)
-  let context = new Context({ 
-    project,
-    options: {
-      font: 'Ubuntu',
-      color: 'black',
-      maxColorDistance: "50",
-    }
-  })
+    textStyles.push({
+        "name": "H1",
+        "fontFace": "Ubuntu-Light",
+        "fontSize": 36,
+        "fontWeight": 300,
+        "fontStyle": "normal",
+        "fontFamily": "Ubuntu",
+        "fontStretch": "normal",
+        "weightText": "light",
+        "color": {
+            "r": 77,
+            "g": 77,
+            "b": 77,
+            "a": 1
+        }
+    })
+    textStyles.push({
+        "name": "Lead",
+        "fontFace": "Ubuntu-Italic",
+        "fontSize": 18,
+        "fontWeight": 400,
+        "fontStyle": "oblique",
+        "fontFamily": "Ubuntu",
+        "fontStretch": "normal",
+        "letterSpacing": 0,
+        "weightText": "regular",
+        "color": {
+            "r": 77,
+            "g": 77,
+            "b": 77,
+            "a": 1
+        }
+    })
 
-  // Act.
-  let css = ext.styleguideTextStyles(context, textStyles.map(data => new TextStyle(data)))
+    let project = new Project(data.project)
+    let context = new Context({
+        project,
+        options: {
+            font: 'Ubuntu',
+            color: 'black',
+            maxColorDistance: '50',
+        }
+    })
 
-  // Assert.
-  let expected = `.sample-text-style {
+    // Act.
+    let css = ext.styleguideTextStyles(context, textStyles.map(data => new TextStyle(data)))
+
+    // Assert.
+    let expected = `.sample-text-style {
   @apply .text-xl .font-sfprotext;
 }
 .sample-text-style-with-color {
@@ -41,29 +72,39 @@ test('exports Tailwind components for text styles', () => {
     expect(css.code).toBe(expected)
 });
 
-test('reads the Tailwing config for things', () => {
+test('reads the Tailwind config for things', () => {
 
-  // Arrange.
-  let project = new Project(data.project)
-  let tailwind = require('../src/tailwind-config.json')
-  tailwind.textSizes.base = "2.25rem"
+    // Arrange.
+    let project = new Project(data.project)
+    let tailwind = require('../src/tailwind-config.json')
+    tailwind.theme.fontSize.base = "2.25rem"
 
-  let context = new Context({ 
-    project,
-    options: {
-      font: 'Ubuntu',
-      color: 'black',
-      maxColorDistance: "50",
-      tailwind: JSON.stringify(tailwind)
-    }
-  })
-  let textStyles = [{"name":"H1","fontFace":"Ubuntu-Light","fontSize":36,"color":{"r":77,"g":77,"b":77,"a":1}}]
+    let context = new Context({
+        project,
+        options: {
+            font: 'Ubuntu',
+            color: 'black',
+            maxColorDistance: '50',
+            tailwind: JSON.stringify(tailwind)
+        }
+    })
+    let textStyles = [{
+        'name': 'H1',
+        'fontFace': 'Ubuntu-Light',
+        'fontSize': 36,
+        'color': {
+            'r': 77,
+            'g': 77,
+            'b': 77,
+            'a': 1
+        }
+    }]
 
-  // Act.
-  let css = ext.styleguideTextStyles(context, textStyles.map(data => new TextStyle(data)))
+    // Act.
+    let css = ext.styleguideTextStyles(context, textStyles.map(data => new TextStyle(data)))
 
-  // Assert.
-  let expected = `.h1 {
+    // Assert.
+    let expected = `.h1 {
   @apply .font-light;
 }
 `
