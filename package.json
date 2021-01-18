@@ -1,9 +1,9 @@
 {
   "name": "tailwind-zeplin-extension",
-  "version": "0.0.0-development",
+  "version": "0.2.1-development",
   "license": "MIT",
   "description": "Utilities to generate Tailwind Config and classes for your components.",
-  "repository": "https://github.com/morrislaptop/tailwind-zeplin-extension.git",
+  "repository": "https://github.com/DamChtlv/tailwind-zeplin-extension.git",
   "bin": "./cli.js",
   "scripts": {
     "start": "zem start",
