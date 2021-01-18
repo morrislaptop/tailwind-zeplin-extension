@@ -81,7 +81,7 @@ let tests = {
   LayerWithGradientFill(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="max-w-xs gradient-to-t from-white"></div>`)
+    expect(css.code).toBe(`<div class="max-w-xs bg-gradient-to-t from-white"></div>`)
   },
 
   LayerWithFill(context, layer) {

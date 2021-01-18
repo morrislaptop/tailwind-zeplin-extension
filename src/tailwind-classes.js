@@ -231,7 +231,7 @@ export function gradientToClass(context, tailwind, fills) {
     let gradientDirClass = ''
     _.each(backgroundImages, (value, key) => {
         if (value.includes(gradientDir) && gradientDirClass === '') {
-            gradientDirClass = key
+            gradientDirClass = 'bg-' + key
         }
     })
 
