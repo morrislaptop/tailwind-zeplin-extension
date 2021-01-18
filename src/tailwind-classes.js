@@ -200,3 +200,64 @@ export function rotateToClass(tailwind, rotate) {
 
     return rotation.includes('-') ? '-rotate-' + Math.abs(rotation) : 'rotate-' + rotation
 }
+
+export function gradientToClass(context, tailwind, fills) {
+    if (!fills[0] || fills[0].type !== 'gradient') return null
+    let fill = fills[0]
+
+    let gradientProps = fill.gradient
+    let gradientFrom = gradientProps.from
+    let gradientTo = gradientProps.to
+    let gradientDirX = '', gradientDirY = ''
+
+    if (gradientFrom.x < gradientTo.x) {
+        gradientDirX = 'right'
+    }
+    else if (gradientFrom.x > gradientTo.x) {
+        gradientDirX = 'left'
+    }
+
+    if (gradientFrom.y < gradientTo.y) {
+        gradientDirY = 'top'
+    }
+    else if (gradientFrom.y > gradientTo.y) {
+        gradientDirY = 'bottom'
+    }
+
+    let gradientDir = gradientDirX && gradientDirY ? gradientDirY + ' ' + gradientDirX : gradientDirX ? gradientDirX : gradientDirY
+    let backgroundImages = tailwind.theme.backgroundImage
+
+    // Grab the direction class
+    let gradientDirClass = ''
+    _.each(backgroundImages, (value, key) => {
+        if (value.includes(gradientDir) && gradientDirClass === '') {
+            gradientDirClass = key
+        }
+    })
+
+    let gradientClasses = ''
+    let gradientsIndex = 0
+
+    let gradientSteps = gradientProps.colorStops
+    if (!gradientSteps[0]) return null
+    _.each(gradientSteps, (value, key) => {
+
+        let gradientPrefixClass = 'from-'
+        if (gradientsIndex === 1) { gradientPrefixClass = 'via-' }
+        else if (gradientsIndex === 2) { gradientPrefixClass = 'to-' }
+
+        let gradientClass = colorToClass(context, value.color, gradientPrefixClass)
+        if (gradientClass === null) return true
+
+        if (gradientClasses !== '') {
+            gradientClasses += ' '
+        }
+
+        gradientClasses += gradientClass
+        gradientsIndex++
+    })
+
+    gradientClasses = gradientDirClass + ' ' + gradientClasses
+
+    return gradientClasses
+}

@@ -21,6 +21,7 @@ import {
     contentToTruncateClass,
     contentToTransformClass,
     rotateToClass,
+    gradientToClass,
 } from './tailwind-classes'
 
 /**
@@ -58,6 +59,7 @@ export function shapeLayerToCode(tailwind, context, layer) {
         borderColor(context, tailwind, layer.borders),
         maxWidthClass(tailwind, layer.rect),
         rotateToClass(tailwind, layer.rotation),
+        gradientToClass(context, tailwind, layer.fills),
         // minHeightClass(tailwind, layer.rect),
     ]
 

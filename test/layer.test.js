@@ -81,7 +81,7 @@ let tests = {
   LayerWithGradientFill(context, layer) {
     let css = ext.layer(context, layer)
 
-    expect(css.code).toBe(`<div class="max-w-xs"></div>`)
+    expect(css.code).toBe(`<div class="max-w-xs gradient-to-t from-white"></div>`)
   },
 
   LayerWithFill(context, layer) {
@@ -115,7 +115,7 @@ describe('Sample Data Tests', () => {
    * Setup our project
    */
   let tailwind = require('../src/tailwind-config.json')
-  tailwind.theme.screens = { }
+  tailwind.theme.screens = {}
   let project = new Project(data.project)
   let context = new Context({ project, options: { font: 'SFProText', color: 'black', maxColorDistance: '50', tailwind: JSON.stringify(tailwind) }})
 
