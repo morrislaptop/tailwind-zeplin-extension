@@ -211,6 +211,7 @@ function layer(context, layer) {
         text: textLayerToCode,
         shape: shapeLayerToCode
     }
+    if (!layerToCode[layer.type]) return null
     let code = layerToCode[layer.type](tailwind, context, layer)
 
     return {
@@ -321,7 +322,7 @@ function colorToClass(context, color, prefix) {
 }
 
 function findClosestColour(context, color) {
-    if (! color) return
+    if (!color || context.project.colors.length === 0) return
     // return color && context.project.findColorEqual(color)
 
     // Convert to object the nearestColor library understands
